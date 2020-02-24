@@ -4,70 +4,28 @@ pipeline {
     }
     tools {
         jdk 'openjdk8'
-        maven 'maven363'
-    }
-    parameters {
-        choice choices: ['Dev', 'Test', 'Prod'], description: 'Environment details', name: 'target_server'
-    }
-    options {
-        timeout(time: 60, unit: 'SECONDS')
+        maven 'maven'
     }
     stages {
-        stage('Test') {
+        stage('Build'){
             steps {
-                sh "mvn clean test surefire-report:report-only"
-                publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/site', reportFiles: 'surefire-report.html', reportName: 'TestReport', reportTitles: ''])
+                sh "mvn clean test"
             }
         }
-        stage('Packaging') {
-            steps {
-                sh "mvn package -DskipTests=true"
-            }
-            post {
-                success {
-                    echo "Inside Packaging stage - Success"
-                }
-                always {
-                    echo "Inside Packaging stage - Always"
-                }
-            }
-        }
-        stage('Deploy'){
-            steps {
-                input message: 'Do you want to me to deploy?', ok: 'Approve'
-                script {
-                    def target = getTargetIp(params.target_server)
-                    sshagent(['uta-dev']) {
-                        sh "scp -o StrictHostKeyChecking=no target/my-app-1-RELEASE.jar ubuntu@${target}:/home/ubuntu"
-                    }
-                }
-            }
-        }
+
     }
-    post {
+    psot {
         success {
-            echo "Good Job"
+            echo "good job"
         }
         failure {
-            echo "Improve the skills"
+            echo "failure work hard"
         }
         always {
-            echo "Work hard"
+            echo "work hard"
         }
     }
 }
-
-def getTargetIp(target_env) {
-    if (target_env == "Dev") {
-        return "172.31.84.164"
-    } else if (target_env == "Test") {
-        return "0.0.0.0"
-    } else if (target_env == "Prod") {
-        return "1.1.1.1"
-    }
-
-}
-
 
 // // node('docker'){
 // //     stage('checkout'){
