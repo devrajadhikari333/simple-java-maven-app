@@ -6,6 +6,9 @@ pipeline {
         jdk 'openjdk8'
         maven 'maven'
     }
+    parameters {
+        choice choices: ['Dev', 'Test', 'Prod'], description: 'choosing the server', name: 'target_server'
+    }
     options {
         timeout(1)
     }
@@ -37,8 +40,11 @@ pipeline {
             steps{
                 //sh "mail -s 'the job is waiting your approval devrajadhikari333@gmail.com'" //if user want to send email to the approval
                 input message: 'Do you want me to Deploy? ', ok: 'Approve'
-                sshagent(['target-dev']) {
-                sh "scp -o StrictHostKeyChecking=no target/my-app-1-RELEASE.jar ec2-user@18.233.155.40:/home/ec2-user"
+                script {
+                    def target = getTargetIp(params.target_server)
+                    sshagent(['target-dev']) {
+                        sh "scp -o StrictHostKeyChecking=no target/my-app-1-RELEASE.jar ec2-user@${target}:/home/ec2-user"
+                    }
                 }
             }
         }
@@ -53,6 +59,15 @@ pipeline {
         always {
             echo "work hard"
         }
+    }
+}
+def getTargetIp(target_env){
+    if (target-env == "dev"){
+        return "172.31.89.147"
+    } else if (target_env == "Test"){
+        return "0.0.0.0"
+    } else if (target_env == "prod"){
+        return "1.1.1.1"
     }
 }
 
