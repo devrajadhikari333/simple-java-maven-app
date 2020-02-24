@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Test'){
             steps {
-                sh "mvn clean test"
+                sh "mvn clean test surefile-report:report-only"
             }
         }
         stage('Packaging'){ 
