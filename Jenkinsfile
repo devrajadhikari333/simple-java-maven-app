@@ -10,7 +10,7 @@ pipeline {
         stage('Test'){
             steps {
                 sh "mvn clean test surefire-report:report-only"
-                publishHTML([allowMissing: True, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/site', reportFiles: 'surefire-report.html', reportName: 'Test Report', reportTitles: ''])
+                publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/site', reportFiles: 'surefire-report.html', reportName: 'Test Report', reportTitles: ''])
             }            
         }
         stage('Packaging'){ 
