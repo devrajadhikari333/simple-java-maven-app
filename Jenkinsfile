@@ -62,11 +62,11 @@ pipeline {
     }
 }
 def getTargetIp(target_env){
-    if (target-env == "dev"){
+    if (target_env == "dev"){
         return "172.31.89.147"
     } else if (target_env == "Test"){
         return "0.0.0.0"
-    } else if (target_env == "prod"){
+    } else if (target_env == "Prod"){
         return "1.1.1.1"
     }
 }
