@@ -63,7 +63,7 @@ pipeline {
 }
 def getTargetIp(target_env){
     if (target_env == "dev"){
-        return "172.31.89.147"
+        return "18.212.59.15"
     } else if (target_env == "Test"){
         return "0.0.0.0"
     } else if (target_env == "Prod"){
