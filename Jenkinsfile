@@ -16,7 +16,7 @@ pipeline {
     }
     post {
         success {
-            echo "good job"
+            echo "good job" //added some comments
         }
         failure {
             echo "failure work hard"
