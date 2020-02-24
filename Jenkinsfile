@@ -29,8 +29,10 @@ pipeline {
                 }
             }
         }
+        
         stage('Deploy'){
             steps{
+                input message: 'Do you want me to Deploy? ', ok: 'Approve'
                 sshagent(['target-dev']) {
                 sh "scp -o StrictHostKeyChecking=no target/my-app-1-RELEASE.jar ec2-user@18.233.155.40:/home/ec2-user"
                 }
