@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy'){
             steps{
                 sshagent(['target-dev']) {
-                sh "scp target/my-app-1-RELEASE.jar ec2-user@18.233.155.40:/home/ec2-user"
+                sh "scp -o StrickHostKeyChecking=no target/my-app-1-RELEASE.jar ec2-user@18.233.155.40:/home/ec2-user"
                 }
             }
         }
