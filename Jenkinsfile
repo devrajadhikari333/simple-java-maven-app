@@ -14,7 +14,7 @@ pipeline {
         }
 
     }
-    psot {
+    post {
         success {
             echo "good job"
         }
