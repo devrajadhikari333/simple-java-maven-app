@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Packaging'){ //packaging is done here
             steps {
-                sh "mvn package"
+                sh "mvn package -DskipTests=true"
             }
             post {
                 success {
