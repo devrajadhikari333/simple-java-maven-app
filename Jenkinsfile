@@ -12,9 +12,9 @@ pipeline {
                 sh "mvn clean test"
             }
         }
-        stage('Packaging'){ //packaging is done here
+        stage('Packaging'){ 
             steps {
-                sh "mvn package"
+                sh "mvn package -DskipTests=true"
             }
             post {
                 success {
