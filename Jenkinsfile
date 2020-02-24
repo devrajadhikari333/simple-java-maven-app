@@ -12,7 +12,21 @@ pipeline {
                 sh "mvn clean test"
             }
         }
-
+        stage('Packaging'){ //packaging is done here
+            steps {
+                sh "mvn package"
+            }
+            post {
+        success {
+            echo "good job packaging is done" //added some comments
+        }
+        failure {
+            echo "failure packaging could not done"
+        }
+        always {
+            echo "work hard"
+        }
+        }
     }
     post {
         success {
