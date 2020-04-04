@@ -26,7 +26,7 @@ node('Maven'){
     }
     stage('package and generate artifacts'){
         try {
-            sh "$mvnHome/opt/app clean package -DskipTests=true"
+            sh "$mvnHome/bin/mvn clean package -DskipTests=true"
             archiveArtifacts allowEmptyArchive: true, artifacts: 'target/**/*.war'
 
         } catch(err){
