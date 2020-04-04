@@ -9,8 +9,8 @@ node('Maven'){
     stage('maven test'){
         try {
             mvnHome=tool 'maven-3.6.3'
-            sh "$mvnHome/opt/app --version"
-            sh "$mvnHome/opt/app clean test surefire-report:report"
+            sh "$mvnHome/bin/mvn --version"
+            sh "$mvnHome/bin/mvn clean test surefire-report:report"
         } catch(err) {
             sh "echo error in defining maven"
         }
