@@ -7,7 +7,7 @@ node('Maven'){
         }
     }
     stage('maven test'){
-        try{
+        try {
             mvnHome=tool 'maven-3.6.6'
             sh "$mvnHome/bin/mvn --version"
             sh "$mvnHome/bin/mvn clean test surefire-report:report"
