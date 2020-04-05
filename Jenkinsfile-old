@@ -10,12 +10,14 @@ pipeline {
         stage('test'){
             steps {
                 sh "mvn clean test surefire-report:report-only"
+                junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
                 publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/site', reportFiles: 'surefire-report.html', reportName: 'HTML Report', reportTitles: ''])
             }
         }
         stage('Packaging'){
             steps{
                 sh "mvn package -DskipTest=true"
+                archiveArtifacts allowEmptyArchive: true, artifacts: 'target/**/*.war'
             }
         }
         stage('Depoly'){
