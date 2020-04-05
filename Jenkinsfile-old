@@ -1,14 +1,16 @@
 pipeline {
-    agents {
+    agent {
         label 'Maven'
     }
     tools {
         jdk 'openjdk8'
         maven 'maven'
     } 
-    stages ('test'){
-        steps {
-            sh "mvn clean test surefire-report:report-only"
+    stages {
+        stage('test'){
+            steps {
+                sh "mvn clean test surefire-report:report-only"
+            }
         }
     }
 }
