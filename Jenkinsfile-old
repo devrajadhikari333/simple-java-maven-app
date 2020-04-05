@@ -21,7 +21,7 @@ pipeline {
         stage('Deploy'){
             steps{
                 input message: 'Do you want to continue to Deploy?', ok: 'allow'
-                sshagent(['ssh-agent']) {
+                sshagent(['deploy']) {
                     sh "scp -o StrictHostKeyChecking=no target/testMaven-1.0.jar ec2-user@172.31.44.160:/home/ec2_user"
                 }
             }
