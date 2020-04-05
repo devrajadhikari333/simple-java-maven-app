@@ -3,7 +3,7 @@ pipeline {
         label 'Maven'
     }
     tools {
-        Home_Java 'openjdk8'
+        jdk 'Home_Java'
         maven 'maven'
     } 
     stages {
