@@ -22,7 +22,7 @@ pipeline {
             steps{
                 input message: 'Do you want to continue to Deploy?', ok: 'allow'
                 sshagent(['Depolyment']) {
-                sh "scp -o StrictHostKeyChecking=no target/testMaven-1.0.jar ec2-user@54.162.209.3:/home/ec2_user"
+                sh "scp -o StrictHostKeyChecking=no target/testMaven-1.0.jar ubuntu@172.31.80.168:/home/ubuntu"
                 }
             }
         }
