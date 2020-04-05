@@ -18,10 +18,10 @@ pipeline {
                 sh "mvn package -DskipTest=true"
             }
         }
-        stage('Deploy'){
+        stage('Depoly'){
             steps{
                 input message: 'Do you want to continue to Deploy?', ok: 'allow'
-                sshagent(['deploy']) {
+                sshagent(['Depolyment']) {
                 sh "scp -o StrictHostKeyChecking=no target/testMaven-1.0.jar ec2-user@54.162.209.3:/home/ec2_user"
                 }
             }
