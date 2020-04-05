@@ -18,5 +18,13 @@ pipeline {
                 sh "mvn package -DskipTest=true"
             }
         }
+        stage('Deploy'){
+            steps{
+                input message: 'Do you want to continue to Deploy?', ok: 'allow'
+                sshagent(['ssh-agent']) {
+                    sh "scp -o StrictHostKeyChecking=notarget/testMaven-1.0.jar ec2-user@172.31.44.160:/home/ec2_user"
+                }
+            }
+        }
     }
 }
